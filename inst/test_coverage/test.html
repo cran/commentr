@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>testCoverage Report commentr</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/black-tie/jquery-ui.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script><!--<script>
+        $(function() {
+          $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+          $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+        });
+    </script>-->
+    <style>
+	.footer {
+		padding-top: 19px;
+		color: #777;
+		border-top: 1px solid #e5e5e5;
+	}
+  .btn,
+  .nav-pills>li>a,
+  .ui-corner-all,
+  .ui-corner-top,
+  .ui-corner-left,
+  .ui-corner-tl {
+    border-radius: 0;
+  }
+  .ui-widget-header {
+    border: 1px solid #aaa;
+  	background: #FAA531;
+  	color: #222222;
+  	font-weight: bold;
+  }
+  .fail {
+    color: #A94442;
+  background-color: #F2DEDE;
+  }
+  .pass {
+    color: #3C763D;
+  background-color: #DFF0D8;
+  }
+    </style>
+</head>
+<body>
+  <script>
+  var tagList = ["1_84","1_87","1_108","1_111","1_150","1_153","1_156","1_159","1_199","1_202","1_205","1_208","1_250","1_253","1_257","1_289","1_299","1_310","1_318","1_326","1_362","1_365","1_375","1_410","1_413","1_421","1_465","1_500","2_43","2_46","2_49","3_154","3_157","3_199","3_209","3_224","3_250","3_258","3_261","3_280","3_283","3_303","3_310","3_313","3_331","3_354","3_363","3_384","3_396","3_409","3_420","3_447","3_459","3_474","3_491","3_517","3_527","3_530","3_554","3_562","5_72","5_154","5_164","5_178","5_202","5_205","5_223","5_236","5_239","5_242","5_286","5_289","5_307","5_312","5_320","5_363","5_373","5_376","5_386","5_397","5_408","5_429","5_434","5_442","5_492","5_509","5_519","5_530","5_554","5_558","5_576","5_622","5_625","5_629","5_649","5_669","5_687","5_707","5_725","5_743","5_761","5_781","5_799","5_817","5_835","5_855","5_874","5_894","5_932","6_52","6_55","6_63","6_131","6_139","6_147","6_227","6_237","6_285","6_290","6_361","6_364","6_388","6_391","6_395","6_414","6_447","6_457","6_460","6_478","6_495","6_507","6_531","6_537","7_46","7_49","7_53","7_56","7_78","7_122"];
+var sumTags = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+var allTags = [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,0,0,0,1,1,1,1,0,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1]];
+var coverage = [[[22,6],[0,3],[22,7],[0,0],[0,49],[24,0],[0,6]],[[0,28],[3,0],[0,29],[0,0],[0,49],[0,24],[0,6]],[[0,28],[0,3],[4,25],[0,0],[0,49],[0,24],[0,6]],[[0,28],[0,3],[0,29],[0,0],[38,11],[0,24],[0,6]],[[0,28],[0,3],[0,29],[0,0],[0,49],[0,24],[0,6]],[[0,28],[0,3],[0,29],[0,0],[0,49],[0,24],[6,0]]];
+var all_coverage = [[22,6],[3,0],[26,3],[0,0],[38,11],[24,0],[6,0]];
+var sumAllTraces = {"0":139,"1":119};
+docolor = function(j, bb) {
+// $("#t_" + tagList[j]).css("backgroundColor", bb ? "lightgreen" : "lightpink");
+    if(bb > 0) {
+        $("#t_" + tagList[j]).removeClass("fail").addClass("pass");
+	} else {
+        $("#t_" + tagList[j]).removeClass("pass").addClass("fail");
+    }
+};
+pbsummed = function(j, cov) {
+    pct = 100 * (cov[0] / (cov[0] + cov[1]));
+    $("#progress-" + (j + 1)).progressbar({
+        value: pct
+    });
+};
+$(document).ready(function() {
+    $.each(sumTags, docolor);
+    $.each(all_coverage, pbsummed);
+    $("#trace_all").click(function() {
+        $.each(sumTags, docolor);
+        $.each(all_coverage, pbsummed)
+    });
+    $.each(allTags, function(i, dum) {
+        $("#run_" + (i + 1)).click(
+            function() {
+                $.each(allTags[i], docolor);
+                $.each(coverage[i], function(j, cov) {
+                    pct = 100 * (cov[0] / (cov[0] + cov[1]));
+                    $("#progress-" + (j + 1)).progressbar({
+                        value: pct
+                    });
+                })
+            });
+    });
+
+    //This will only run if jQuery has loaded.
+    $(".internet-connectivity").hide();
+});
+$( document ).ready(function() {
+  $(".internet-connectivity").hide();
+})
+  </script>
+  <div class="alert alert-danger internet-connectivity" role="alert"><h1><strong>Warning:</strong> An internet connection is required to load external assets.</h1></div>
+  <div class="container">
+  <div class="jumbotron">
+    <h1>testCoverage Report <small>commentr</small></h1>
+  </div>
+  <h2>Summary</h2>
+<!-- html table generated in R 3.1.2 by xtable 1.7-4 package -->
+<!-- Fri Dec  5 09:46:36 2014 -->
+<table class="table table-bordered">
+<tr> <th>  </th> <th> Total # Tracepoints </th> <th> # Executed </th> <th> % Coverage </th>  </tr>
+  <tr> <td align="right"> commentr </td> <td> 139 </td> <td> 119 </td> <td>  86% </td> </tr>
+   </table>
+<h2>testthat Tests</h2>
+	<button type="button" class="btn btn-default" id="trace_all">All Tests</button>&nbsp;<button type='button' class='btn btn-default' id='run_1'>test-block_comment.R</button>&nbsp;<button type='button' class='btn btn-default' id='run_2'>test-comment_line.R</button>&nbsp;<button type='button' class='btn btn-default' id='run_3'>test-comment_width.R</button>&nbsp;<button type='button' class='btn btn-default' id='run_4'>test-header_coment.R</button>&nbsp;<button type='button' class='btn btn-default' id='run_5'>test-help_functions.R</button>&nbsp;<button type='button' class='btn btn-default' id='run_6'>test-line_comment.R</button>&nbsp;<h2>Resource Files</h2><div class="row">
+       <div class="col-md-4">
+        <ul class="nav nav-pills nav-stacked" role="tablist"><li class="active"><a role="tab" data-toggle="tab" href="#tabs-1">block_comment.R</a><div id="progress-1" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-2">comment_line.R</a><div id="progress-2" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-3">comment_width.R</a><div id="progress-3" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-4">commentr.R</a><div id="progress-4" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-5">header_comment.R</a><div id="progress-5" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-6">help_functions.R</a><div id="progress-6" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-7">line_comment.R</a><div id="progress-7" ></div></li>
+</ul>
+    </div> 
+    <div class="col-md-8">
+    <div class="tab-content"><div class="tab-pane active" id="tabs-1"><pre>
+
+
+#' @rdname comment
+#' @export
+<span id="t_1_13">block_comment</span> &lt;- function(
+  description         = "",
+  empty_lines_first   = 1,
+  empty_lines_last    = empty_lines_first,
+  allign              = "center",
+  token               = "#",
+  html                = FALSE,
+  clipboard           = TRUE,
+  verbose             = TRUE,
+  ...
+) {
+  
+  ##  Specify width
+  <span id="t_1_84">width</span> &lt;- <span id="t_1_87">comment_width(...)</span>
+  
+  # Translate the allign argument to the side argument for str_pad
+  # The names would be confusing without this recoding
+  <span id="t_1_108">side</span> &lt;- <span id="t_1_111">switch(allign, "right" = "left", "left" = "right", "center" = "both")</span>
+  
+  ## Create the empty lines to add first and last
+  <span id="t_1_150">elf</span> &lt;- <span id="t_1_153">paste(<span id="t_1_156">rep(<span id="t_1_159">empty_line(width, token = token)</span>, empty_lines_first)</span>, collapse = "\n")</span>
+  <span id="t_1_199">ell</span> &lt;- <span id="t_1_202">paste(<span id="t_1_205">rep(<span id="t_1_208">empty_line(width, token = token)</span>, empty_lines_last)</span>, collapse = "\n")</span>
+  
+  <span id="t_1_250">msg</span> &lt;- <span id="t_1_253">paste(
+    <span id="t_1_257">full_line(width, token = token)</span>,
+    elf,    
+    ## Conditions used to specify if the text should be on just one alligned line or split
+    ## onto several lines.
+    if (<span id="t_1_289">str_length(description)</span> &lt;= <span id="t_1_299">width</span> - 4){
+      <span id="t_1_310">paste(token, <span id="t_1_318">str_pad(description, <span id="t_1_326">width</span> - 4, side = side)</span>, token)</span>
+    } else{
+      <span id="t_1_362">x</span> &lt;- <span id="t_1_365">strwrap(description, width = <span id="t_1_375">width</span> - 2, prefix = token, indent = 1, exdent = 1)</span>
+      <span id="t_1_410">paste(<span id="t_1_413">str_pad(x, <span id="t_1_421">width</span> - 2, side = "right")</span>, token)</span>
+    },
+    ell,
+    <span id="t_1_465">full_line(width, token = token)</span>,
+    sep = "\n"
+  )</span>
+  
+  <span id="t_1_500">out(msg, html, clipboard, verbose)</span>
+  
+}</pre></div><div class="tab-pane " id="tabs-2"><pre>
+#' @rdname comment
+#' @export
+<span id="t_2_9">comment_line</span> &lt;- function(..., clipboard = TRUE, verbose = TRUE, token = "#", html = FALSE){
+  <span id="t_2_43">out(<span id="t_2_46">full_line(<span id="t_2_49">comment_width(...)</span>, token = token)</span>, html, clipboard, verbose)</span>
+}</pre></div><div class="tab-pane " id="tabs-3"><pre>
+
+
+
+################################################################################
+#                                                                              #
+#                           Exported helper function                           #
+#                                                                              #
+################################################################################
+
+
+
+#' Function to specify the width of the comment
+#'
+#' Helper function to the commet family of functions. Can take both numerical values as the width
+#' in characters or a prespecified standard through a character string.
+#'
+#' The width is specified in order to fit the comment on a printed page or in a script file showed in RStudio
+#' (hence  the -5 in \code{getOption("width") - 5} to adjust for the line numbering in the script file compared to the console.
+#' It is also possible to use a global option \code{comment_width}. This is not a standard option and has to be manually
+#' specified (for example in a .Rprofile-file).
+#'
+#' @param width is the prefered width. Could be numeric (number of characters), a paper size
+#' (currently \code{"a4portrait"}, \code{"a4landscape"}, \code{"a3portrait"} or \code{"a3landscape"}),
+#'  \code{"script_width"} (= \code{getOption("width") - 5}) or \code{"option"} (to get data from global option \code{"comment_width"}).
+#'  Default is \code{"option"} but if a global option does not exist, "a4portrait".
+#' @param a4portrait_width specifies the number of characters that can be printed on a single line on a a4 paper
+#' in portrait orientation. This value is usually 80 (or in the range from 60 to 75). Here a lower value is set by default
+#' due to experimentation on the authors own computer. Please contact the author if this value seems strange.
+#' Note however that it is usully more sufficient to use a global option for the \code{width} parameter than to
+#' manually change this value (whih is however possible for increased flexibility). This value depends on margins and font size
+#' when printing.
+#'
+#' @return An integer specifiing the text width (in number of characters) to be used in a comment.
+#' @export
+#' @examples
+#' comment_width()
+#' comment_width(42)
+#' comment_width("a4portrait")
+#'
+#'\dontrun{
+#' # We can set a global option for the comment_width
+#' options(comment_width = 80)
+#' header_comment("Test", "A small test")
+#' }
+#'
+<span id="t_3_132">comment_width</span> &lt;- function(width = "option", a4portrait_width = 80){
+  
+  # Check that width is a valid argument
+  <span id="t_3_154">valid_width_arguments</span> &lt;- <span id="t_3_157">c("option", "script_width", "a4portrait", "a4landscape", "a3portrait", "a3landscape")</span>
+  if ( !(<span id="t_3_199">is.numeric(width)</span> | <span id="t_3_209">width</span> %in% valid_width_arguments)){
+    <span id="t_3_224">stop("Invalid width argument! See ?comment_width for help!")</span>
+  }
+  
+  # Use global option if possible, otherwise use a4portrait as default
+  if (<span id="t_3_250">width</span> == "option" & !<span id="t_3_258">is.null(<span id="t_3_261">getOption("comment_width")</span>)</span>){
+    <span id="t_3_280">width</span> &lt;- <span id="t_3_283">getOption("comment_width")</span>
+  } else if (<span id="t_3_303">width</span> == "option" & <span id="t_3_310">is.null(<span id="t_3_313">getOption("comment_width")</span>)</span>){
+    <span id="t_3_331">width</span> &lt;- "a4portrait"
+  }
+  
+  # a4portrait is usually recommended to 80 but 53 was the value found when experimenting
+  <span id="t_3_354">a4portrait</span>   &lt;- a4portrait_width
+  <span id="t_3_363">golden_ratio</span> &lt;- 8 / 5
+  
+  # If width_text is numeric, it should be translated into a numeric value.
+  # If it is not a character, it is preserved and returned unchanged
+  <span id="t_3_384">text2num</span> &lt;- function(width_text){
+    if (<span id="t_3_396">is.character(width_text)</span>){
+      <span id="t_3_409">switch(width_text,
+             "script_width" = <span id="t_3_420">getOption("width")</span> - 5,
+             "a4portrait"   = a4portrait,
+             "a4landscape"  = <span id="t_3_447">a4portrait</span> * golden_ratio,
+             "a3portrait"   = <span id="t_3_459">a4portrait</span> * golden_ratio,
+             "a3landscape"  = 2 * <span id="t_3_474">a4portrait</span>)</span>
+    } else{
+      <span id="t_3_491">width_text</span>
+    }
+  }
+  
+  if (<span id="t_3_517">width</span> %in% valid_width_arguments){
+    <span id="t_3_527">width</span> &lt;- <span id="t_3_530">text2num(width)</span>
+  }
+  
+  
+  <span id="t_3_554">min(width, <span id="t_3_562">text2num("script_width")</span>)</span>
+  
+}
+
+</pre></div><div class="tab-pane " id="tabs-4"><pre>
+################################################################################
+#                                                                              #
+#                              General help page                               #
+#                                                                              #
+################################################################################
+
+
+#' Create nicely formated comments
+#'
+#' Functions to automate creation of nicely formated comments. Comments are printed to the console and can thereafter be copied to script files.
+#'
+#' The header_comment function uses global options for name, contact and textwidth as default. Width is a standard option in R
+#' but name and contact are not. It might be
+#' a good idea to define those as global options in a .Rprofile-script (use Google if you do not know the concept!).
+#' Dates for creation and last update are both set to the same date.
+#' The update date has to be manually updated in the script
+#' (the output of the functuion is just a template to start with; it should not be nececasy to run the
+#' function each time a script is updated.)
+#'
+#' @section Functions:
+#' There are 4 functions to help with script comments
+#'
+#' \itemize{
+#'  \item header_comment: a header introduction to be included at the top of the script
+#'  \item block_comment: a block comment to make a title for a new section in the script
+#'  \item line_comment: a one line comment surrounded by hashtags
+#'  \item comment_line: a line of hashtags (no text)
+#' }
+#'
+#' @param title a short and descriptive title.
+#' @param description additional information about the script. Could be a single line or a full paragraph. Empty character string as default.
+#' @param author name of the script author(s). From getOption("name") as default.
+#' @param contact How to contact the author of the script. From getOption("contact") as default.
+#' @param client Name (and possible contact information) to the client for who the script was written. Sets author as default (assuming you wrote the script for yourself).
+#' @param date_created A character string defining the date when the script was created. Todays date as default. The date is specified as a string and does not need to be exact.
+#' For example "Many years ago" would be accepted if you want to add a heading to an old script.
+#' @param date_updated A character string defining the date when the script was last updated. Same as date_created by default.
+#' @param source is the path to where the script was originaly stored . This information might be good if the document is printed, forgotten and found. Current directory as default.
+#' @param tab "tabulation length" to add space betwen left column titles and right column text.
+#' @param empty_lines_first number of empty lines to be added before the text in a block comment. 1 by default.
+#' @param empty_lines_last number of empty lines to be added after the text in a block comment. Same as \code{empty_lines_first} by default.
+#' @param allign specify text allignment. "center" as default with other options "left" and "right". If the text is too long to be fit on one line, it is split to a left aligned paragraph (\code{allign} being ignored).
+#' @param token a character string specifying the comment character to be used. Default is \code{"#"}, which should be used in R scripts.
+#' @param html Should the comment be used in a HTML- or R Markdown-document (FALSE by default). If so, the comment starts
+#' with "&lt;!--" and ends with "--&gt;".
+#' \code{token = "\%"} could be used to create comments for LaTeX and \code{token = "*"} for Stata etcetera. The length of the character string is not restricted but should normally
+#' be just one character. If a longer character string is used, the width of the comment would be multiplied by the number of characters.
+#' This might result in a quite messy output.
+#' @param clipboard Should the output be copied to clipboard? (\code{TRUE} by default). Corrently only supported on Mac. 
+#' @param verbose Should the comment be printed to the console? (\code{TRUE} by default). This could be used if \code{clipboard = TRUE} and run on a Mac.
+#' @param ... arguments passed to \link{comment_width} to specify the width of the comment.
+#' @return There is no object returned from the function call. There is just a printed message to the console that could be copied to the beginning of a script).
+#' @examples
+#' \dontrun{
+#'
+#' # If global options specifies "author" and "contact", these do not need to be specified every time:
+#' header_comment("Test", "This is a little test")
+#'
+#' header_comment("Test", "This is just a test!", width = "script_width")
+#'
+#' header_comment("Smaller block", "This is a smaller test block!", width = 55, tab = 17)
+#'
+#' header_comment("Smaller block", "This is a small test block but with a longer extra description
+#'    that has to be split from a single line into a full paragraph.", width = 55, tab = 17)
+#' }
+#'
+#' header_comment("Nice script", "This is a very nice script that is well documented",
+#'      author       = "Jane Doe",
+#'      contact      = "jane@@doe.se",
+#'      client       = "John Doe",
+#'      date_created = "2014-07-03",
+#'      width        = "a4landscape")
+#'
+#' block_comment("A title for a new section in the script")
+#' block_comment("A shorter box", width = 50)
+#' block_comment("A compact title", empty_lines_first = 0, allign = "left")
+#' \dontrun{
+#' block_comment("A longer descriptive text that has to be
+#'    separated into several lines in order to fit.
+#'    Then it is no longer alligned to 'center' even if so specified!", allign = "center")
+#' }
+#' line_comment("A comment in the middle of a line")
+#' line_comment("A comment in the middle of a shorter line", 50)
+#'
+#' comment_line()
+#' comment_line(42)
+#' @name comment
+#' @import stringr
+NULL
+
+#' @name commentr
+#' @rdname comment
+NULL
+</pre></div><div class="tab-pane " id="tabs-5"><pre>
+
+
+#' @rdname comment
+#' @export
+
+<span id="t_5_15">header_comment</span> &lt;- function(
+  title,
+  description = "",
+  author      = getOption("name"),
+  contact     = getOption("contact"),
+  client      = author,
+  date_created= format(<span id="t_5_72">Sys.time()</span>, "%Y-%m-%d"),
+  date_updated= date_created,
+  source      = getwd(),
+  tab         = 17,
+  token       = "#",
+  html        = FALSE,
+  clipboard   = TRUE,
+  verbose     = TRUE,
+  ...
+){
+  
+  ##  Felmeddelande om det saknas author och/eller contact
+  if (<span id="t_5_154">is.null(author)</span> | <span id="t_5_164">is.null(contact)</span>){ 
+    <span id="t_5_178">stop("Author and/or contact not specified!")</span>
+  }
+  
+  ##  Width of the comment
+  <span id="t_5_202">width</span> &lt;- <span id="t_5_205">comment_width(...)</span>
+  
+  ##  Skapa textrad med titel och innehåll
+  <span id="t_5_223">text_line</span> &lt;- function(which_text, text) {
+    <span id="t_5_236">pre</span>  &lt;- <span id="t_5_239">str_pad(<span id="t_5_242">paste0(token, " ", which_text, ":")</span>, tab, side = "right")</span>
+    <span id="t_5_286">text</span> &lt;- <span id="t_5_289">paste0(pre, text)</span>
+    <span id="t_5_307">paste0(stringr<span id="t_5_312">::</span>str_pad(text, <span id="t_5_320">width</span> - 1, side = "right"), token)</span>
+  }
+  
+  ##  Skapa textstycke utan titel
+  <span id="t_5_363">text_paragraph</span> &lt;- function(text){
+    <span id="t_5_373">x</span> &lt;- <span id="t_5_376">strwrap(text, width = <span id="t_5_386">width</span> - 2, indent = <span id="t_5_397">tab</span> - 1, exdent = <span id="t_5_408">tab</span> - 1, prefix = token)</span>
+    <span id="t_5_429">paste(stringr<span id="t_5_434">::</span>str_pad(x, <span id="t_5_442">width</span> - 2, side = "right"), token, collapse = "\n")</span>
+  }
+  
+  ##  Bryt upp en lång text till stycke om nödvändigt, annars inte
+  <span id="t_5_492">text_cond_paragraph</span> &lt;- function(which_text, text){
+    if (stringr<span id="t_5_509">::</span>str_length(text) &lt; <span id="t_5_519">width</span> - tab){
+      <span id="t_5_530">text_line(which_text, text)</span>
+    } else{
+      <span id="t_5_554">paste(
+        <span id="t_5_558">text_line(which_text, "")</span>,
+        <span id="t_5_576">text_paragraph(text)</span>,
+        sep = "\n"
+      )</span>
+    }
+  }
+  
+  
+  <span id="t_5_622">msg</span> &lt;- <span id="t_5_625">paste(
+    <span id="t_5_629">full_line(width, token = token)</span>,
+    <span id="t_5_649">empty_line(width, token = token)</span>,
+    <span id="t_5_669">text_line("Purpose", title)</span>,
+    <span id="t_5_687">empty_line(width, token = token)</span>,
+    <span id="t_5_707">text_line("Author", author)</span>,
+    <span id="t_5_725">text_line("Contact", contact)</span>,
+    <span id="t_5_743">text_line("Client", client)</span>,
+    <span id="t_5_761">empty_line(width, token = token)</span>,
+    <span id="t_5_781">text_line("Code created", date_created)</span>,
+    <span id="t_5_799">text_line("Last updated", date_updated)</span>,
+    <span id="t_5_817">text_line("Source", source)</span>,
+    <span id="t_5_835">empty_line(width, token = token)</span>,
+    <span id="t_5_855">text_cond_paragraph("Comment", description)</span>, # writeLines anropat via text_cond_paragraph
+    <span id="t_5_874">empty_line(width, token = token)</span>,
+    <span id="t_5_894">full_line(width, token = token)</span>,
+    sep = "\n"
+  )</span>
+
+  ## Handle the output
+  <span id="t_5_932">out(msg, html, clipboard, verbose)</span>
+}
+</pre></div><div class="tab-pane " id="tabs-6"><pre>
+
+################################################################################
+#                                                                              #
+#                               Helper functions                               #
+#                                                                              #
+################################################################################
+
+
+#' Helper function to create string with repeated hashtags
+#' @param ... arguments passed to \code{comment_width}
+#' @param token a character specifying the comment symbol. "#" by default.
+#' @keywords internal
+<span id="t_6_36">full_line</span> &lt;- function(..., token = "#"){
+  <span id="t_6_52">paste0(<span id="t_6_55">rep_len(token, <span id="t_6_63">comment_width(...)</span>)</span>, collapse = "")</span>
+}
+
+
+#' Helper function to create string with hashtags and spaces
+#' @param ... arguments passed to \code{comment_width}
+#' @param token a character specifying the comment symbol. "#" by default.
+#' @keywords internal
+<span id="t_6_115">empty_line</span> &lt;- function(..., token = "#"){
+  <span id="t_6_131">paste0(token, <span id="t_6_139">str_pad(" ", <span id="t_6_147">comment_width(...)</span> - 2, side = "both")</span>, pad = token, collapse = "")</span>
+}
+
+
+#' Comment start for R Markdown/HTML
+#' @param html should the comment be used in HTML (FASLE by default)
+#' @keywords internal
+<span id="t_6_214">comment_start</span> &lt;- function(html = FALSE){
+  <span id="t_6_227">paste0("\n", if (<span id="t_6_237">html</span>) "&lt;!--")</span>
+}
+
+#' Comment end for R Markdown/HTML
+#' @param html should the comment be used in HTML (FASLE by default)
+#' @keywords internal
+<span id="t_6_272">comment_end</span> &lt;- function(html = FALSE){
+  <span id="t_6_285">paste0(if (<span id="t_6_290">html</span>) "--&gt;", "\n")</span>
+}
+
+
+#' Handle output of the comment
+#' @param msg the comment to return
+#' @param clipboard,verbose,html See \code{\link{commentr}}
+#' @keywords internal
+<span id="t_6_335">out</span> &lt;- function(msg, html, clipboard = TRUE, verbose = TRUE){
+ 
+  <span id="t_6_361">mac</span> &lt;- <span id="t_6_364">Sys.info()</span>[['sysname']] == "Darwin"
+    
+  <span id="t_6_388">msg</span> &lt;- <span id="t_6_391">paste(
+    <span id="t_6_395">comment_start(html)</span>,
+    msg,
+    <span id="t_6_414">comment_end(html)</span>,
+    sep = "\n"
+  )</span>
+    
+  ## if on Mac OSX and flagged to true, then copy to clipboard
+  if(<span id="t_6_447">clipboard</span> &&  mac) {
+    <span id="t_6_457">con</span> &lt;- <span id="t_6_460">pipe("pbcopy", "w")</span>
+    <span id="t_6_478">writeLines(msg, con)</span>
+    <span id="t_6_495">close(con)</span>
+    <span id="t_6_507">message("The comment has been copied to clipboard and can be pasted into a script file!")</span> 
+  }
+  
+  if (<span id="t_6_531">verbose</span>){
+    <span id="t_6_537">writeLines(msg)</span>
+  }
+}
+</pre></div><div class="tab-pane " id="tabs-7"><pre>
+#' @rdname comment
+#' @export
+<span id="t_7_9">line_comment</span> &lt;- function(title, ..., clipboard = TRUE, verbose = TRUE, token = "#", html = FALSE){
+  <span id="t_7_46">msg</span> &lt;- <span id="t_7_49">paste(
+    <span id="t_7_53">str_pad(<span id="t_7_56">paste0(" ", title, " ")</span>, <span id="t_7_78">comment_width(...)</span>, side = "both", pad = token)</span>,
+    sep = "\n"
+  )</span>
+  <span id="t_7_122">out(msg, html, clipboard, verbose)</span>
+  
+}</pre></div>
+    </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p> Generated on2014-12-05 09:46:36 by <a href="http://www.mango-solutions.com/wp/products-services/r-services/r-packages/testcoverage/">testCoverage</a>.</p>
+  </div>
+  </div>
+</body> 
+</html>

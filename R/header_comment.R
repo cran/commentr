@@ -1,6 +1,4 @@
 
-
-
 #' @rdname comment
 #' @export
 
@@ -16,57 +14,68 @@ header_comment <- function(
   tab         = 17,
   token       = "#",
   html        = FALSE,
+  clipboard   = TRUE,
+  verbose     = TRUE,
   ...
 ){
   
-  ##  Felmeddelande om det saknas author och/eller contact
-  if (is.null(author) | is.null(contact)) stop("Author and/or contact not specified! This can either be set manually (by strings) or by global option parameters 'name' and 'contact'. See '?options' for details!")
+  ##  Error if missing author/contact
+  if (is.null(author) | is.null(contact)){ 
+    stop("Author and/or contact not specified!")
+  }
   
   ##  Width of the comment
   width <- comment_width(...)
   
-  ##  Skapa textrad med titel och innehåll
+  ##  Line with text and label
   text_line <- function(which_text, text) {
     pre  <- str_pad(paste0(token, " ", which_text, ":"), tab, side = "right")
     text <- paste0(pre, text)
-    paste0(str_pad(text, width - 1, side = "right"), token)
+    paste0(stringr::str_pad(text, width - 1, side = "right"), token)
   }
   
-  ##  Skapa textstycke utan titel
+  ##  Line with text only
   text_paragraph <- function(text){
     x <- strwrap(text, width = width - 2, indent = tab - 1, exdent = tab - 1, prefix = token)
-    paste(str_pad(x, width - 2, side = "right"), token)
+    paste(stringr::str_pad(x, width - 2, side = "right"), token, collapse = "\n")
   }
   
-  ##  Bryt upp en lång text till stycke om nödvändigt, annars inte
+  ##  Linebreak too long text line
   text_cond_paragraph <- function(which_text, text){
-    if (str_length(text) < width - tab){
-      writeLines(text_line(which_text, text))
+    if (stringr::str_length(text) < width - tab){
+      text_line(which_text, text)
     } else{
-      writeLines(text_line(which_text, ""))
-      writeLines(text_paragraph(text))
+      part1 <- substr(text, 1, width - tab - 3)
+      part2 <- substring(text, width - tab - 2)
+      paste(
+        text_line(which_text, part1),
+        text_paragraph(part2),
+        sep = "\n"
+      )
     }
   }
   
-  ##  Print out header
-  comment_start(html)
-  writeLines(full_line(width, token = token))
-  writeLines(empty_line(width, token = token))
-  writeLines(text_line("Purpose", title))
-  writeLines(empty_line(width, token = token))
-  writeLines(text_line("Author", author))
-  writeLines(text_line("Contact", contact))
-  writeLines(text_line("Client", client))
-  writeLines(empty_line(width, token = token))
-  writeLines(text_line("Code created", date_created))
-  writeLines(text_line("Last updated", date_updated))
-  writeLines(text_line("Source", source))
-  writeLines(empty_line(width, token = token))
-  text_cond_paragraph("Comment", description) # writeLines anropat via text_cond_paragraph
-  writeLines(empty_line(width, token = token))
-  writeLines(full_line(width, token = token))
-  comment_end(html)
   
-  ## No returned object (just output message to the console)
+  msg <- paste(
+    full_line(width, token = token),
+    empty_line(width, token = token),
+    text_cond_paragraph("Purpose", title),
+    empty_line(width, token = token),
+    text_cond_paragraph("Author", author),
+    text_cond_paragraph("Contact", contact),
+    text_cond_paragraph("Client", client),
+    empty_line(width, token = token),
+    text_cond_paragraph("Code created", date_created),
+    text_cond_paragraph("Last updated", date_updated),
+    text_cond_paragraph("Source", source),
+    empty_line(width, token = token),
+    text_cond_paragraph("Comment", description), # writeLines called through text_cond_paragraph
+    empty_line(width, token = token),
+    full_line(width, token = token),
+    sep = "\n"
+  )
+
+  ## Handle the output
+  out(msg, html, clipboard, verbose)
 }
 

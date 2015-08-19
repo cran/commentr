@@ -1,0 +1,8 @@
+commentr v 1.0.1
+==============
+  * Bug fixes
+  * comment_line depriciated but functionality still in line_comment
+  
+commentr v 0.2  
+==============
+  * Added the possiblility to copy output to clipboard on Mac, which is now default.
