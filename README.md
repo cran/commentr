@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/cancercentrum/commentr.png?branch=master)](https://travis-ci.org/cancercentrum/commentr)
 
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/commentr)](https://cran.r-project.org/package=commentr/)
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 commentr
 ========
@@ -19,7 +21,6 @@ header_comment(
 )
 #> The comment has been copied to clipboard and can be pasted into a script file!
 #> 
-#> 
 #> ######################################################################
 #> #                                                                    #
 #> # Purpose:       Just an example!                                    #
@@ -28,9 +29,9 @@ header_comment(
 #> # Contact:       erik.bulow@rccvast.se                               #
 #> # Client:        Erik Bülow                                          #
 #> #                                                                    #
-#> # Code created:  2015-08-19                                          #
-#> # Last updated:  2015-08-19                                          #
-#> # Source:        /Users/erikbulow/Documents/R-kod/commentr           #
+#> # Code created:  2016-03-19                                          #
+#> # Last updated:  2016-03-19                                          #
+#> # Source:        /Users/erikbulow/commentr                           #
 #> #                                                                    #
 #> # Comment:       Just want to show a script header that can be copi  #
 #> #                ed to an R script                                   #
@@ -39,7 +40,6 @@ header_comment(
 
 block_comment("A small block comment")
 #> The comment has been copied to clipboard and can be pasted into a script file!
-#> 
 #> 
 #> ######################################################################
 #> #                                                                    #
@@ -50,13 +50,11 @@ block_comment("A small block comment")
 line_comment("Comment on one line")
 #> The comment has been copied to clipboard and can be pasted into a script file!
 #> 
-#> 
 #> ######################## Comment on one line #########################
 
 # Comment line without comment
 line_comment("")
 #> The comment has been copied to clipboard and can be pasted into a script file!
-#> 
 #> 
 #> ######################################################################
 ```
@@ -68,9 +66,9 @@ The package can be downloaded from CRAN
 
     install.packages("commentr")
 
-The latest development version can also be downloaded from Github using the devtools package:
+The latest development version can also be downloaded from Bitbucket using the devtools package:
 
-    devtools::install_github("cancercentrum/commentr")
+    devtools::install_bitbucket("cancercentrum/commentr")
 
 Global options
 ==============
